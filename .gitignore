@@ -1,0 +1,30 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing / coverage
+/coverage
+/test-results
+/playwright-report
+/.playwright
+
+# next.js build output
+/.next
+/out
+/build
+next-env.d.ts
+
+# env & secrets
+.env
+.env*.local
+
+# large raw datasets — never commit; fetch or pre-trim instead
+/data/raw
+*.csv
+*.parquet
+
+# misc
+.DS_Store
+*.tsbuildinfo
+*.log

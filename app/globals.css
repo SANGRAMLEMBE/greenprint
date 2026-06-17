@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Respect users who prefer reduced motion (accessibility). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+:focus-visible { outline: 3px solid #1b7a43; outline-offset: 2px; }
