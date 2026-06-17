@@ -20,8 +20,10 @@ export function ActionCard({ action, committed }: Props) {
 
   return (
     <article
-      className={`rounded-xl border-2 p-5 transition-colors ${
-        committed ? 'border-leaf bg-leaf/5' : 'border-gray-100 bg-white hover:border-gray-200'
+      className={`rounded-2xl border p-5 transition-all duration-200 ${
+        committed
+          ? 'border-leaf/30 bg-leaf-50 shadow-soft'
+          : 'border-gray-100 bg-white hover:border-leaf/20 hover:shadow-soft'
       }`}
       aria-label={`${action.title}. Saves ${savingT} tonnes CO₂e per year.`}
     >

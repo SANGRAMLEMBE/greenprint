@@ -15,16 +15,16 @@ export function Nav() {
   const hasResult = result !== null;
 
   return (
-    <nav aria-label="Main navigation" className="sticky top-0 z-10 bg-white border-b border-gray-100 shadow-sm">
+    <nav aria-label="Main navigation" className="sticky top-0 z-20 bg-sand/80 backdrop-blur-md border-b border-gray-100">
       <div className="mx-auto max-w-3xl px-4">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <button
             type="button"
             onClick={() => setStep('questionnaire')}
-            className="font-bold text-leaf-dark text-base tracking-tight"
+            className="font-black text-leaf-dark text-base tracking-tight flex items-center gap-1.5"
           >
-            🌍 Carbon Companion
+            <span aria-hidden="true">🌍</span> Greenprint
           </button>
 
           {/* Tabs */}

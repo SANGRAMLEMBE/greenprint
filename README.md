@@ -1,12 +1,12 @@
-# Carbon Companion 🌍
+# Greenprint 🌍
 
-**A personal carbon companion that helps one individual understand, track, and reduce their carbon footprint through simple actions and personalised insights.**
+**A personal carbon platform that helps an individual understand, track, and reduce their carbon footprint through simple actions and personalised insights.**
 
 > Problem statement: _"Design a solution that helps individuals understand, track, and reduce their carbon footprint through simple actions and personalized insights."_
 
 This project is **individual-first by design**. A person answers a short questionnaire, sees an honest, sourced breakdown of their annual footprint, learns what drives it most, gets a **ranked personalised action plan** with the real kg CO₂e each action saves, commits to actions and watches their number drop, tracks progress over time, and sees a **live grid-intensity signal** telling them the best time to run power-hungry appliances. Country/world data appears only as motivating context — never as the centrepiece.
 
-**Live demo:** _<add Vercel URL here>_
+**Live demo:** https://greenprint-gamma.vercel.app
 
 ---
 

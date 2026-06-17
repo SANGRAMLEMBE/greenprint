@@ -13,6 +13,7 @@ import { ActionCard } from '@/components/actions/ActionCard';
 import { ScenarioSimulator } from '@/components/actions/ScenarioSimulator';
 import { ProgressChart } from '@/components/tracking/ProgressChart';
 import { CommittedActionsSummary } from '@/components/tracking/CommittedActionsSummary';
+import { Hero } from '@/components/landing/Hero';
 import { getPersonalisedActions } from '@/lib/actions/data';
 
 export default function HomePage() {
@@ -43,30 +44,30 @@ export default function HomePage() {
       <main id="main" className="mx-auto max-w-3xl px-4 py-8">
         {step === 'questionnaire' && (
           <div>
-            <div className="mb-8 text-center">
-              <h1 className="text-3xl font-black text-coal mb-2">
-                Know your footprint. <span className="text-leaf">Act on it.</span>
-              </h1>
-              <p className="text-gray-500 max-w-md mx-auto text-sm">
-                Answer 5 quick questions to get an honest, source-cited breakdown of your
-                annual CO₂ footprint and a ranked personal action plan.
-              </p>
+            <Hero />
+            <div className="rounded-3xl bg-white shadow-card ring-1 ring-gray-100 p-6 sm:p-8 animate-slide-up">
+              <QuestionnaireShell />
             </div>
-            <QuestionnaireShell />
           </div>
         )}
 
         {step === 'results' && (
           <div className="space-y-6" aria-live="polite">
             <ResultsHero />
-            <FootprintBreakdown />
-            <CountryComparison />
-            <LiveGridSignal />
+            <div className="animate-slide-up [animation-delay:100ms]">
+              <FootprintBreakdown />
+            </div>
+            <div className="animate-slide-up [animation-delay:180ms]">
+              <CountryComparison />
+            </div>
+            <div className="animate-slide-up [animation-delay:260ms]">
+              <LiveGridSignal />
+            </div>
           </div>
         )}
 
         {step === 'actions' && (
-          <div>
+          <div className="animate-fade-in">
             <ActionPlanHeader />
             <div className="space-y-3" aria-label="Personalised action cards">
               {actions.map((action) => (
@@ -77,7 +78,7 @@ export default function HomePage() {
                 />
               ))}
               {actions.length === 0 && (
-                <p className="text-center text-gray-500 py-8">
+                <p className="text-center text-coal-light py-8">
                   You&apos;ve committed to all available actions. Impressive! 🎉
                 </p>
               )}
@@ -87,7 +88,7 @@ export default function HomePage() {
         )}
 
         {step === 'tracking' && (
-          <div>
+          <div className="animate-fade-in">
             <h1 className="text-2xl font-bold text-coal mb-6">Your progress</h1>
             <ProgressChart />
             <CommittedActionsSummary />
@@ -95,13 +96,13 @@ export default function HomePage() {
         )}
       </main>
 
-      <footer className="mt-16 border-t border-gray-100 py-6 text-center text-xs text-gray-400">
-        <p>
+      <footer className="mt-16 border-t border-gray-100 py-8 text-center text-xs text-coal-light">
+        <p className="mx-auto max-w-2xl px-4 leading-relaxed">
           Emission factors: DEFRA/DESNZ 2023 · EPA eGRID 2023 · IEA 2022 · Poore &amp; Nemecek (2018) ·{' '}
-          <a href="https://ourworldindata.org" target="_blank" rel="noopener noreferrer" className="underline">
+          <a href="https://ourworldindata.org" target="_blank" rel="noopener noreferrer" className="underline hover:text-leaf">
             Our World in Data
           </a>{' '}
-          (CC BY). CO₂e uses IPCC AR6 GWP100. Data stays in your browser — no account, no PII sent.
+          (CC BY). CO₂e uses IPCC AR6 GWP100. Your data stays in your browser — no account, nothing sent.
         </p>
       </footer>
     </>

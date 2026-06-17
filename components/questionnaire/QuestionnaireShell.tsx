@@ -96,11 +96,13 @@ export function QuestionnaireShell() {
         {STEP_TITLES[step - 1]}
       </h1>
 
-      {step === 1 && <Step1Region draft={draft} updateDraft={updateDraft} />}
-      {step === 2 && <Step2Transport draft={draft} updateDraft={updateDraft} />}
-      {step === 3 && <Step3Home draft={draft} updateDraft={updateDraft} />}
-      {step === 4 && <Step4DietFlights draft={draft} updateDraft={updateDraft} />}
-      {step === 5 && <Step5Consumption draft={draft} updateDraft={updateDraft} />}
+      <div key={step} className="animate-fade-in">
+        {step === 1 && <Step1Region draft={draft} updateDraft={updateDraft} />}
+        {step === 2 && <Step2Transport draft={draft} updateDraft={updateDraft} />}
+        {step === 3 && <Step3Home draft={draft} updateDraft={updateDraft} />}
+        {step === 4 && <Step4DietFlights draft={draft} updateDraft={updateDraft} />}
+        {step === 5 && <Step5Consumption draft={draft} updateDraft={updateDraft} />}
+      </div>
 
       <div className="mt-8 pt-6 border-t border-gray-100 flex justify-between">
         <button
