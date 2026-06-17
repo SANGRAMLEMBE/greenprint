@@ -25,6 +25,23 @@ html {
     #faf9f6;
 }
 
+/* World scene: rotate SVG parts around their own box, and tween colours
+   smoothly so the landscape "heals" gradually as the footprint changes. */
+.svg-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.svg-sway {
+  transform-box: fill-box;
+  transform-origin: bottom center;
+}
+.scene-tween {
+  transition:
+    fill 1.4s ease,
+    stop-color 1.4s ease,
+    opacity 1.4s ease;
+}
+
 /* Respect users who prefer reduced motion (accessibility). */
 @media (prefers-reduced-motion: reduce) {
   html {

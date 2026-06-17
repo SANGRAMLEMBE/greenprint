@@ -14,6 +14,7 @@ import { ScenarioSimulator } from '@/components/actions/ScenarioSimulator';
 import { ProgressChart } from '@/components/tracking/ProgressChart';
 import { CommittedActionsSummary } from '@/components/tracking/CommittedActionsSummary';
 import { Hero } from '@/components/landing/Hero';
+import { WorldScene } from '@/components/scene/WorldScene';
 import { getPersonalisedActions } from '@/lib/actions/data';
 
 export default function HomePage() {
@@ -40,6 +41,8 @@ export default function HomePage() {
 
   return (
     <>
+      <WorldScene />
+      <div className="relative z-10">
       <Nav />
       <main id="main" className="mx-auto max-w-3xl px-4 py-8">
         {step === 'questionnaire' && (
@@ -105,6 +108,7 @@ export default function HomePage() {
           (CC BY). CO₂e uses IPCC AR6 GWP100. Your data stays in your browser — no account, nothing sent.
         </p>
       </footer>
+      </div>
     </>
   );
 }

@@ -49,6 +49,25 @@ const config: Config = {
           '70%': { transform: 'scale(1.1)', opacity: '0' },
           '100%': { transform: 'scale(1.1)', opacity: '0' },
         },
+        'cloud-cross': {
+          from: { transform: 'translateX(-340px)' },
+          to: { transform: 'translateX(1340px)' },
+        },
+        'smoke-rise': {
+          '0%': { transform: 'translateY(0) scale(1)', opacity: '0.55' },
+          '100%': { transform: 'translateY(-140px) scale(2.2)', opacity: '0' },
+        },
+        sway: {
+          '0%, 100%': { transform: 'rotate(-2deg)' },
+          '50%': { transform: 'rotate(2deg)' },
+        },
+        'spin-slow': {
+          to: { transform: 'rotate(360deg)' },
+        },
+        shimmer: {
+          '0%, 100%': { opacity: '0.3' },
+          '50%': { opacity: '0.65' },
+        },
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-out both',
@@ -56,6 +75,11 @@ const config: Config = {
         'scale-in': 'scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both',
         float: 'float 4s ease-in-out infinite',
         'pulse-ring': 'pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'cloud-cross': 'cloud-cross 70s linear infinite',
+        'smoke-rise': 'smoke-rise 4s ease-out infinite',
+        sway: 'sway 5s ease-in-out infinite',
+        'spin-slow': 'spin-slow 9s linear infinite',
+        shimmer: 'shimmer 4s ease-in-out infinite',
       },
     },
   },
