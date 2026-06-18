@@ -26,6 +26,11 @@ export default function HomePage() {
     setMounted(true);
   }, []);
 
+  // Scroll to the top whenever the user moves between sections.
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
+
   if (!mounted) {
     return (
       <>

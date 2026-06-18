@@ -28,7 +28,10 @@ export function QuestionnaireShell() {
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    headingRef.current?.focus();
+    // Jump back to the top on each step, then move focus to the new heading
+    // (preventScroll so focus doesn't fight the scroll we just triggered).
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    headingRef.current?.focus({ preventScroll: true });
   }, [step]);
 
   function updateDraft(patch: Partial<DraftInput>) {
