@@ -18,6 +18,7 @@ import type {
   FootprintResult,
   RegionCode,
 } from './types';
+import { CATEGORY_LABELS } from './categories';
 
 const WEEKS_PER_YEAR = 52;
 
@@ -70,14 +71,6 @@ export function flightsKg(input: FootprintInput['flights']): number {
 export function consumptionKg(input: FootprintInput['consumption']): number {
   return CONSUMPTION_FACTORS[input].value;
 }
-
-const CATEGORY_LABELS: Readonly<Record<CategoryKey, string>> = {
-  transport: 'Transport',
-  home: 'Home energy',
-  diet: 'Diet',
-  flights: 'Flights',
-  consumption: 'Shopping & goods',
-};
 
 /** Calculates total footprint and per-category breakdown from validated input. */
 export function calculateFootprint(input: FootprintInput): FootprintResult {

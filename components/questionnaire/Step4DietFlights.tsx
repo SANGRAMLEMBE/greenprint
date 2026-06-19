@@ -2,6 +2,7 @@
 
 import { DIET_FACTORS, FLIGHT_FACTORS, dietKg, flightsKg } from '@/lib/carbon';
 import type { DietPattern } from '@/lib/carbon';
+import { formatTonnes } from '@/lib/format';
 import type { StepProps } from './types';
 
 const DIETS: { value: DietPattern; label: string; emoji: string; note: string }[] = [
@@ -28,7 +29,7 @@ export function Step4DietFlights({ draft, updateDraft }: StepProps) {
     mediumHaulPerYear: draft.mediumHaulPerYear,
     longHaulPerYear: draft.longHaulPerYear,
   });
-  const total = ((dietKgVal + flightKgVal) / 1000).toFixed(2);
+  const total = formatTonnes(dietKgVal + flightKgVal);
 
   return (
     <div className="space-y-8">
@@ -69,7 +70,7 @@ export function Step4DietFlights({ draft, updateDraft }: StepProps) {
                   </div>
                   <div className="text-xs text-gray-500">{note}</div>
                   <div className="text-xs font-medium text-gray-400 mt-0.5">
-                    {(kg / 1000).toFixed(1)} t CO₂e/yr
+                    {formatTonnes(kg, 1)} t CO₂e/yr
                   </div>
                 </div>
               </label>
@@ -91,7 +92,7 @@ export function Step4DietFlights({ draft, updateDraft }: StepProps) {
               <div key={key} className="flex items-center justify-between rounded-lg border border-gray-100 p-3">
                 <div>
                   <p className="text-sm font-medium text-coal">{label}</p>
-                  <p className="text-xs text-gray-500">{range} · {(kgPerFlight / 1000).toFixed(1)} t CO₂e each</p>
+                  <p className="text-xs text-gray-500">{range} · {formatTonnes(kgPerFlight, 1)} t CO₂e each</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <button

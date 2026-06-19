@@ -1,8 +1,11 @@
 'use client';
 
 import { useFootprintStore } from '@/lib/store/footprint';
+import { formatTonnes } from '@/lib/format';
 import type { CarbonAction } from '@/lib/actions/data';
 
+// Each difficulty gets its own little pill colour so the effort is readable
+// at a glance without reading the word.
 const DIFFICULTY_STYLES = {
   easy: 'bg-green-50 text-green-700',
   medium: 'bg-amber-50 text-amber-700',
@@ -16,7 +19,7 @@ interface Props {
 
 export function ActionCard({ action, committed }: Props) {
   const { commitAction, uncommitAction } = useFootprintStore();
-  const savingT = (action.savingKgCO2ePerYear / 1000).toFixed(2);
+  const savingT = formatTonnes(action.savingKgCO2ePerYear);
 
   return (
     <article

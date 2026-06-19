@@ -12,6 +12,14 @@ import { committedSavingsKg } from '@/lib/actions/data';
  * Purely decorative (aria-hidden) and all motion stops under prefers-reduced-motion.
  */
 
+// The two ends of the "health" scale, in tonnes CO₂e/yr. At the Paris target the
+// world is pristine; up at a heavy-consumption footprint it's fully polluted.
+// Everything in between is interpolated.
+const PRISTINE_TCO2E = 2;
+const POLLUTED_TCO2E = 16;
+// Before anyone has calculated a footprint, show a hopeful-but-not-perfect scene.
+const DEFAULT_HEALTH = 0.72;
+
 const clamp = (n: number, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, n));
 
 function lerp(a: number, b: number, t: number) {
@@ -103,9 +111,12 @@ export function WorldScene() {
     footprint = Math.max(0, result.totalTCO2ePerYear - savedT);
   }
 
-  // 2 t (Paris target) → fully healthy; 16 t → fully polluted. Default to a
-  // pleasant, hopeful scene before any calculation has been done.
-  const health = footprint === null ? 0.72 : clamp((16 - footprint) / 14);
+  // Map the footprint onto 0–1: 1 = pristine (at/under the Paris target),
+  // 0 = fully polluted (at/over the heavy-consumption end).
+  const health =
+    footprint === null
+      ? DEFAULT_HEALTH
+      : clamp((POLLUTED_TCO2E - footprint) / (POLLUTED_TCO2E - PRISTINE_TCO2E));
   const pollution = 1 - health;
   const c = palette(health);
 

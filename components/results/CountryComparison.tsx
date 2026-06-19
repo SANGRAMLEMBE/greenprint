@@ -12,6 +12,7 @@ import {
 } from 'recharts';
 import { useFootprintStore } from '@/lib/store/footprint';
 import { getComparisonCountries, getCountryRank, PARIS_TARGET_TCO2E } from '@/lib/data/countries';
+import { BRAND, footprintColor } from '@/lib/ui/theme';
 
 export function CountryComparison() {
   const { result, input } = useFootprintStore();
@@ -52,12 +53,14 @@ export function CountryComparison() {
             <XAxis type="number" unit=" t" tick={{ fontSize: 11 }} />
             <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={56} />
             <Tooltip formatter={(v: number) => [`${v} t CO₂e/capita`, '']} />
-            <ReferenceLine x={PARIS_TARGET_TCO2E} stroke="#1b7a43" strokeDasharray="4 2" label={{ value: '2t target', fontSize: 10, fill: '#1b7a43' }} />
+            <ReferenceLine x={PARIS_TARGET_TCO2E} stroke={BRAND.leaf} strokeDasharray="4 2" label={{ value: '2t target', fontSize: 10, fill: BRAND.leaf }} />
             <Bar dataKey="value" radius={[0, 4, 4, 0]}>
               {chartData.map((entry) => (
+                // The user's own bar is dark so it stands out; every other
+                // country is tinted by how its footprint compares to the target.
                 <Cell
                   key={entry.code}
-                  fill={entry.isUser ? '#1f2933' : entry.value <= 2 ? '#1b7a43' : entry.value <= 6 ? '#f59e0b' : '#ef4444'}
+                  fill={entry.isUser ? BRAND.coal : footprintColor(entry.value)}
                 />
               ))}
             </Bar>

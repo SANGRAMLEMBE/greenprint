@@ -1,6 +1,7 @@
 'use client';
 
 import { homeKg } from '@/lib/carbon';
+import { formatTonnes } from '@/lib/format';
 import type { StepProps } from './types';
 
 export function Step3Home({ draft, updateDraft }: StepProps) {
@@ -12,7 +13,7 @@ export function Step3Home({ draft, updateDraft }: StepProps) {
     },
     draft.region
   );
-  const tonnes = (kg / 1000).toFixed(2);
+  const tonnes = formatTonnes(kg);
 
   return (
     <div className="space-y-8">

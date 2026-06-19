@@ -2,29 +2,16 @@
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { useFootprintStore } from '@/lib/store/footprint';
-
-const COLOURS: Record<string, string> = {
-  transport: '#1b7a43',
-  home: '#2ecc71',
-  diet: '#f59e0b',
-  flights: '#ef4444',
-  consumption: '#8b5cf6',
-};
-
-const CATEGORY_LABELS: Record<string, string> = {
-  transport: 'Transport',
-  home: 'Home energy',
-  diet: 'Diet',
-  flights: 'Flights',
-  consumption: 'Shopping',
-};
+import { CATEGORY_COLORS } from '@/lib/ui/theme';
 
 export function FootprintBreakdown() {
   const { result } = useFootprintStore();
   if (!result) return null;
 
+  // The engine already labelled and sorted the categories for us — here we just
+  // reshape them into the {name, value, share} rows recharts wants to plot.
   const data = result.categories.map((c) => ({
-    name: CATEGORY_LABELS[c.key] ?? c.label,
+    name: c.label,
     value: Math.round(c.kgCO2ePerYear),
     key: c.key,
     share: Math.round(c.share * 100),
@@ -52,7 +39,7 @@ export function FootprintBreakdown() {
               labelLine={false}
             >
               {data.map((entry) => (
-                <Cell key={entry.key} fill={COLOURS[entry.key] ?? '#94a3b8'} />
+                <Cell key={entry.key} fill={CATEGORY_COLORS[entry.key]} />
               ))}
             </Pie>
             <Tooltip
@@ -79,7 +66,7 @@ export function FootprintBreakdown() {
               <td className="py-2 flex items-center gap-2">
                 <span
                   className="inline-block w-3 h-3 rounded-full shrink-0"
-                  style={{ backgroundColor: COLOURS[row.key] ?? '#94a3b8' }}
+                  style={{ backgroundColor: CATEGORY_COLORS[row.key] }}
                   aria-hidden="true"
                 />
                 {row.name}

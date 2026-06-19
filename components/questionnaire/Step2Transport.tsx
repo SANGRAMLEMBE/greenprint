@@ -3,6 +3,7 @@
 import { CAR_FACTORS, TRANSIT_FACTORS } from '@/lib/carbon';
 import { transportKg } from '@/lib/carbon';
 import type { CarFuel, TransitMode } from '@/lib/carbon';
+import { formatTonnes } from '@/lib/format';
 import type { StepProps } from './types';
 
 const CAR_FUELS: { value: CarFuel; label: string; emoji: string }[] = [
@@ -25,7 +26,7 @@ export function Step2Transport({ draft, updateDraft }: StepProps) {
     transitKmPerWeek: draft.transitKmPerWeek,
     transitMode: draft.transitMode,
   });
-  const tonnes = (kg / 1000).toFixed(2);
+  const tonnes = formatTonnes(kg);
 
   return (
     <div className="space-y-8">

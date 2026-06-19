@@ -13,6 +13,8 @@ import {
 import { useFootprintStore } from '@/lib/store/footprint';
 import { PARIS_TARGET_TCO2E } from '@/lib/data/countries';
 import { committedSavingsKg } from '@/lib/actions/data';
+import { BRAND } from '@/lib/ui/theme';
+import { formatTonnes } from '@/lib/format';
 
 export function ProgressChart() {
   const { history, result, saveToHistory, committedActionIds, input } = useFootprintStore();
@@ -47,7 +49,7 @@ export function ProgressChart() {
   const chartData = history.map((h) => ({
     date: h.date,
     footprint: h.totalTCO2ePerYear,
-    saved: parseFloat((h.committedSavingsKg / 1000).toFixed(2)),
+    saved: parseFloat(formatTonnes(h.committedSavingsKg)),
   }));
 
   return (
@@ -71,22 +73,22 @@ export function ProgressChart() {
       <div aria-hidden="true" className="h-52">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+            <CartesianGrid strokeDasharray="3 3" stroke={BRAND.gridLine} />
             <XAxis dataKey="date" tick={{ fontSize: 11 }} />
             <YAxis unit=" t" tick={{ fontSize: 11 }} />
             <Tooltip formatter={(v: number) => [`${v} t CO₂e/yr`, 'Footprint']} />
             <ReferenceLine
               y={PARIS_TARGET_TCO2E}
-              stroke="#1b7a43"
+              stroke={BRAND.leaf}
               strokeDasharray="4 2"
-              label={{ value: 'Paris 2t', fontSize: 10, fill: '#1b7a43', position: 'insideTopRight' }}
+              label={{ value: 'Paris 2t', fontSize: 10, fill: BRAND.leaf, position: 'insideTopRight' }}
             />
             <Line
               type="monotone"
               dataKey="footprint"
-              stroke="#1f2933"
+              stroke={BRAND.coal}
               strokeWidth={2}
-              dot={{ fill: '#1f2933', r: 4 }}
+              dot={{ fill: BRAND.coal, r: 4 }}
               activeDot={{ r: 6 }}
             />
           </LineChart>
@@ -109,7 +111,7 @@ export function ProgressChart() {
               <td className="py-1.5">{h.date}</td>
               <td className="py-1.5 text-right font-medium">{h.totalTCO2ePerYear}</td>
               <td className="py-1.5 text-right text-leaf">
-                {(h.committedSavingsKg / 1000).toFixed(2)} t
+                {formatTonnes(h.committedSavingsKg)} t
               </td>
             </tr>
           ))}

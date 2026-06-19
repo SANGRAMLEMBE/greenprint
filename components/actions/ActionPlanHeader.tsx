@@ -3,13 +3,16 @@
 import { useFootprintStore } from '@/lib/store/footprint';
 import { committedSavingsKg } from '@/lib/actions/data';
 import { PARIS_TARGET_TCO2E } from '@/lib/data/countries';
+import { formatTonnes } from '@/lib/format';
 
 export function ActionPlanHeader() {
   const { result, input, committedActionIds } = useFootprintStore();
   if (!result || !input) return null;
 
+  // Three numbers tell the whole story: where you are now, what you've pledged
+  // to save, and where that lands you. "Projected" is current minus pledged.
   const savedKg = committedSavingsKg(input, committedActionIds);
-  const savedT = (savedKg / 1000).toFixed(2);
+  const savedT = formatTonnes(savedKg);
   const projectedT = Math.max(0, result.totalTCO2ePerYear - savedKg / 1000);
   const parisGapT = Math.max(0, result.totalTCO2ePerYear - PARIS_TARGET_TCO2E);
 

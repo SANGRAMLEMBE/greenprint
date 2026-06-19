@@ -2,6 +2,7 @@
 
 import { CONSUMPTION_FACTORS } from '@/lib/carbon';
 import type { ConsumptionLevel } from '@/lib/carbon';
+import { formatTonnes } from '@/lib/format';
 import type { StepProps } from './types';
 
 const TIERS: {
@@ -72,7 +73,7 @@ export function Step5Consumption({ draft, updateDraft }: StepProps) {
               </div>
               <div className="text-right shrink-0">
                 <p className={`text-lg font-bold ${selected ? 'text-leaf-dark' : 'text-coal'}`}>
-                  {(kg / 1000).toFixed(1)} t
+                  {formatTonnes(kg, 1)} t
                 </p>
                 <p className="text-xs text-gray-400">CO₂e/yr</p>
               </div>

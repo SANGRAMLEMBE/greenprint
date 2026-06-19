@@ -2,8 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
-// World CO2 emissions are ~37 billion tonnes/year → ~1,173 tonnes per second.
-const TONNES_PER_SECOND = 37_000_000_000 / (365.25 * 24 * 60 * 60);
+// Global CO2 emissions run at roughly 37 billion tonnes a year (Global Carbon
+// Project). Spread across the seconds in a year that's ~1,173 tonnes/second —
+// the rate the live counter below ticks up at.
+const ANNUAL_GLOBAL_CO2_TONNES = 37_000_000_000;
+const SECONDS_PER_YEAR = 365.25 * 24 * 60 * 60;
+const TONNES_PER_SECOND = ANNUAL_GLOBAL_CO2_TONNES / SECONDS_PER_YEAR;
 
 /** A live-ticking counter of global CO2 emitted since the page loaded. */
 function GlobalCounter() {

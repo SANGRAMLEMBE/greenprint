@@ -2,15 +2,18 @@
 
 import { useFootprintStore } from '@/lib/store/footprint';
 import { ALL_ACTIONS, committedSavingsKg } from '@/lib/actions/data';
+import { formatTonnes } from '@/lib/format';
 
 export function CommittedActionsSummary() {
   const { committedActionIds, input, result, uncommitAction } = useFootprintStore();
 
   if (!input || !result) return null;
 
+  // Pull the full action objects back out of the committed ID list so we can
+  // show their titles, then tally up everything they save.
   const committed = ALL_ACTIONS.filter((a) => committedActionIds.includes(a.id));
   const totalSavedKg = committedSavingsKg(input, committedActionIds);
-  const totalSavedT = (totalSavedKg / 1000).toFixed(2);
+  const totalSavedT = formatTonnes(totalSavedKg);
   const projectedT = Math.max(0, result.totalTCO2ePerYear - totalSavedKg / 1000);
 
   return (
@@ -54,7 +57,7 @@ export function CommittedActionsSummary() {
                   </div>
                   <div className="flex items-center gap-3">
                     <span className="text-sm font-medium text-leaf">
-                      −{(kg / 1000).toFixed(2)} t/yr
+                      −{formatTonnes(kg)} t/yr
                     </span>
                     <button
                       type="button"
